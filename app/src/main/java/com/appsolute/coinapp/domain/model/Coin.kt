@@ -1,7 +1,4 @@
-package com.appsolute.coinapp.application
-
-import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
+package com.appsolute.coinapp.domain.model
 
 /**
  * Created by Toan (Alex) Duong.
@@ -9,5 +6,10 @@ import dagger.hilt.android.HiltAndroidApp
  * Do Not Copy
  * Please Contact braveheart3208@gmail.com for more information
  */
-@HiltAndroidApp
-class CoinApplication : Application()
+data class Coin(
+    val id: String,
+    val isActive: Boolean,
+    val name: String,
+    val rank: Int,
+    val symbol: String,
+)
