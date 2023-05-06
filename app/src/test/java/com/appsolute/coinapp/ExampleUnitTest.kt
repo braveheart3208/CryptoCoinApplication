@@ -1,4 +1,4 @@
-package com.appsolute.stockmarketapp
+package com.appsolute.coinapp
 
 import org.junit.Test
 

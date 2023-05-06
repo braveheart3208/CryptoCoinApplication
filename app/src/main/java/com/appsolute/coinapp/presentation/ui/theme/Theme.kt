@@ -1,4 +1,4 @@
-package com.appsolute.stockmarketapp.ui.theme
+package com.appsolute.coinapp.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

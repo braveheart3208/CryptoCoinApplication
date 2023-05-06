@@ -1,4 +1,4 @@
-package com.appsolute.stockmarketapp
+package com.appsolute.coinapp
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

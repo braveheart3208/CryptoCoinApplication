@@ -1,4 +1,4 @@
-package com.appsolute.stockmarketapp.ui.theme
+package com.appsolute.coinapp.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
