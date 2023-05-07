@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.appsolute.stockmarketapp'
+    namespace 'com.appsolute.coinapp'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.appsolute.stockmarketapp"
+        applicationId "com.appsolute.coinapp"
         minSdk 25
         targetSdk 33
         versionCode 1
