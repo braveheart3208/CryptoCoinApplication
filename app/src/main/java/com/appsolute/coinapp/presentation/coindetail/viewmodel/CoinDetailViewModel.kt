@@ -10,7 +10,7 @@ import com.appsolute.coinapp.domain.usecase.GetCoinByIdUsecase
 import com.appsolute.coinapp.presentation.coindetail.event.CoinDetailScreenEvent
 import com.appsolute.coinapp.presentation.coindetail.state.CoinDetailState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,6 +29,8 @@ class CoinDetailViewModel @Inject constructor(
     private val _coinDetailState = mutableStateOf(CoinDetailState())
     val coinDetailState: State<CoinDetailState> = _coinDetailState
 
+    var getCoinDetailJob: Job? = null
+
     init {
         savedStateHandle.get<String>("coinId")?.let { coinId ->
             getCoinDetail(coinId)
@@ -40,8 +42,9 @@ class CoinDetailViewModel @Inject constructor(
     }
 
     private fun getCoinDetail(coinId: String) {
-        viewModelScope.launch {
-            getCoinByIdUsecase(coinId).onEach { result ->
+        getCoinDetailJob?.cancel()
+        getCoinDetailJob = viewModelScope.launch {
+            getCoinByIdUsecase(coinId).collect { result ->
                 when (result) {
                     is Resource.OnError -> {
                         _coinDetailState.value =
