@@ -18,7 +18,7 @@ class CoinRepoImpl @Inject constructor(
     private val coinApi: CoinApi
 ) : CoinRepository {
     override suspend fun getCoins(): List<Coin> {
-        return coinApi.getCoins()?.coins!!.map { it.toCoinDetail() }
+        return coinApi.getCoins().map { it.toCoinDetail() }
     }
 
     override suspend fun getCoinDetail(coinId: String): CoinDetail? {

@@ -10,7 +10,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 /**
@@ -35,8 +35,8 @@ object ApplicationModule {
 
         return Retrofit.Builder()
             .baseUrl("https://api.coinpaprika.com/")
-            .addConverterFactory(MoshiConverterFactory.create())
-            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+//            .client(client)
             .build()
             .create(CoinApi::class.java)
     }

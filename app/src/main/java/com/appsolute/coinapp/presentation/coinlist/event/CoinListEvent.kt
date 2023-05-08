@@ -1,5 +1,7 @@
 package com.appsolute.coinapp.presentation.coinlist.event
 
+import com.appsolute.coinapp.domain.model.Coin
+
 /**
  * Created by Toan (Alex) Duong.
  * This project StockMarketApp belongs to Appsolute.
@@ -7,4 +9,6 @@ package com.appsolute.coinapp.presentation.coinlist.event
  * Please Contact braveheart3208@gmail.com for more information
  */
 
-sealed class CoinListEvent
+sealed class CoinListEvent{
+    class OnCoinSelected(coin : Coin) : CoinListEvent()
+}

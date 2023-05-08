@@ -10,7 +10,6 @@ import com.appsolute.coinapp.presentation.coinlist.event.CoinListEvent
 import com.appsolute.coinapp.presentation.coinlist.state.CoinListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,9 +37,8 @@ class CoinListViewModel @Inject constructor(
     }
 
     private fun getCoins() {
-        getCoinsJob?.cancel()
-        getCoinsJob = viewModelScope.launch {
-            getCoinsUsecase(Unit).onEach { result ->
+        viewModelScope.launch {
+            getCoinsUsecase(Unit).collect { result ->
                 when (result) {
                     is Resource.OnLoading -> {
                         _coinListState.value = coinListState.value.copy(isLoading = true)

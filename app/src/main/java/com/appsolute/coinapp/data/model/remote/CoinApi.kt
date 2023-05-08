@@ -1,6 +1,7 @@
 package com.appsolute.coinapp.data.model.remote
 
 import com.appsolute.coinapp.data.model.remote.dto.coin.AvailableCoinsDTO
+import com.appsolute.coinapp.data.model.remote.dto.coin.CoinDTO
 import com.appsolute.coinapp.data.model.remote.dto.coindetail.CoinDetailDTO
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -13,7 +14,7 @@ import retrofit2.http.Path
  */
 interface CoinApi {
     @GET("/v1/coins")
-    suspend fun getCoins(): AvailableCoinsDTO?
+    suspend fun getCoins(): List<CoinDTO>
 
     @GET("/v1/coins/{coinId}")
     suspend fun getCoinById(@Path("coinId") coinId: String): CoinDetailDTO?

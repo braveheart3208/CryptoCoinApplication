@@ -6,12 +6,9 @@ package com.appsolute.coinapp.domain.model
  * Do Not Copy
  * Please Contact braveheart3208@gmail.com for more information
  */
-data class CoinDetail(
-    val name : String,
-    val description: String,
+
+data class TeamMember(
     val id: String,
-    val isActive: Boolean,
-    val symbol: String,
-    val tags: List<String>,
-    val members : List<TeamMember>
+    val name: String,
+    val position: String
 )
