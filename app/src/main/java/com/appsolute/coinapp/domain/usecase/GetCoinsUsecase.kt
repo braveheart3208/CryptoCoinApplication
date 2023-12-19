@@ -8,7 +8,6 @@ import com.appsolute.coinapp.domain.model.Coin
 import com.appsolute.coinapp.domain.repository.CoinRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okio.IOException
@@ -31,8 +30,6 @@ class GetCoinsUsecase @Inject constructor(
     override suspend fun doWork(params: Unit): Flow<Resource<List<Coin>>> = flow {
         try {
             emit(Resource.OnLoading())
-//            delay(3000)
-//            emit(Resource.OnError(message = UiText.DynamicString("Test Error")))
             val coinList = coinRepository.getCoins()
             emit(Resource.OnSuccess(data = coinList))
         } catch (httpException: HttpException) {

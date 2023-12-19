@@ -11,4 +11,6 @@ import com.appsolute.coinapp.domain.model.Coin
 
 sealed class CoinListEvent{
     class OnCoinSelected(coin : Coin) : CoinListEvent()
+
+    class OnSortingOptionSelected(val sortingOption : String) : CoinListEvent()
 }

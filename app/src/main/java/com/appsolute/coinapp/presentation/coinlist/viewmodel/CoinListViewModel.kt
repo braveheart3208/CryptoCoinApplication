@@ -5,7 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.appsolute.coinapp.application.core.Resource
+import com.appsolute.coinapp.domain.model.SortingType
 import com.appsolute.coinapp.domain.usecase.GetCoinsUsecase
+import com.appsolute.coinapp.domain.usecase.SortCoinsUsecase
 import com.appsolute.coinapp.presentation.coinlist.event.CoinListEvent
 import com.appsolute.coinapp.presentation.coinlist.state.CoinListState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +23,8 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class CoinListViewModel @Inject constructor(
-    private val getCoinsUsecase: GetCoinsUsecase
+    private val getCoinsUsecase: GetCoinsUsecase,
+    private val sortCoinsUsecase : SortCoinsUsecase
 ) : ViewModel() {
     private val _coinListState = mutableStateOf(CoinListState())
     val coinListState: State<CoinListState> = _coinListState
@@ -33,11 +36,20 @@ class CoinListViewModel @Inject constructor(
     }
 
     fun onEventCalled(event: CoinListEvent) {
+        when (event) {
+            is CoinListEvent.OnSortingOptionSelected -> {
+                _coinListState.value = coinListState.value.copy(sortingType = SortingType.fromString(event.sortingOption))
 
+                sortCoinList()
+            }
+
+            else -> Unit
+        }
     }
 
     private fun getCoins() {
-        viewModelScope.launch {
+        getCoinsJob?.cancel()
+        getCoinsJob = viewModelScope.launch {
             getCoinsUsecase(Unit).collect { result ->
                 when (result) {
                     is Resource.OnLoading -> {
@@ -52,9 +64,22 @@ class CoinListViewModel @Inject constructor(
                     is Resource.OnSuccess -> {
                         _coinListState.value =
                             coinListState.value.copy(isLoading = false, coins = result.data!!)
+                        sortCoinList()
                     }
                 }
             }
+        }
+    }
+
+    private fun sortCoinList(){
+        if(_coinListState.value.sortingType == SortingType.SortDescending){
+            _coinListState.value = coinListState.value.copy(
+                coins = sortCoinsUsecase.sortCoinsDescending(coinListState.value.coins)
+            )
+        }else if(_coinListState.value.sortingType == SortingType.SortAscending){
+            _coinListState.value = coinListState.value.copy(
+                coins = sortCoinsUsecase.sortCoinsAscending(coinListState.value.coins)
+            )
         }
     }
 }

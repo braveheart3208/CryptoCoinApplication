@@ -36,7 +36,7 @@ object ApplicationModule {
         return Retrofit.Builder()
             .baseUrl("https://api.coinpaprika.com/")
             .addConverterFactory(GsonConverterFactory.create())
-//            .client(client)
+            .client(client)
             .build()
             .create(CoinApi::class.java)
     }
