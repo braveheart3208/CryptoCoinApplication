@@ -1,7 +1,7 @@
 package com.appsolute.coinapp.data.repository
 
 import com.appsolute.coinapp.data.model.remote.CoinApi
-import com.appsolute.coinapp.domain.mapper.toCoinDetail
+import com.appsolute.coinapp.domain.mapper.toCoin
 import com.appsolute.coinapp.domain.model.Coin
 import com.appsolute.coinapp.domain.model.CoinDetail
 import com.appsolute.coinapp.domain.repository.CoinRepository
@@ -18,10 +18,10 @@ class CoinRepoImpl @Inject constructor(
     private val coinApi: CoinApi
 ) : CoinRepository {
     override suspend fun getCoins(): List<Coin> {
-        return coinApi.getCoins().map { it.toCoinDetail() }
+        return coinApi.getCoins().map { it.toCoin() }
     }
 
     override suspend fun getCoinDetail(coinId: String): CoinDetail? {
-        return coinApi.getCoinById(coinId)?.toCoinDetail()
+        return coinApi.getCoinById(coinId)?.toCoin()
     }
 }

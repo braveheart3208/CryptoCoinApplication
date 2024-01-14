@@ -1,5 +1,6 @@
 package com.appsolute.coinapp.domain.mapper
 
+import com.appsolute.coinapp.application.extension.Empty
 import com.appsolute.coinapp.data.model.remote.dto.coin.CoinDTO
 import com.appsolute.coinapp.data.model.remote.dto.coindetail.CoinDetailDTO
 import com.appsolute.coinapp.domain.model.Coin
@@ -13,29 +14,29 @@ import com.appsolute.coinapp.domain.model.TeamMember
  * Please Contact braveheart3208@gmail.com for more information
  */
 
-fun CoinDTO.toCoinDetail(): Coin {
+fun CoinDTO.toCoin(): Coin {
     return Coin(
-        id = this.id!!,
-        isActive = this.is_active!!,
-        name = this.name!!,
-        rank = this.rank!!,
-        symbol = this.symbol!!
+        id = this.id ?: String.Empty,
+        isActive = this.is_active ?: false,
+        name = this.name ?: String.Empty,
+        rank = this.rank ?: 0,
+        symbol = this.symbol ?: String.Empty
     )
 }
 
-fun CoinDetailDTO.toCoinDetail(): CoinDetail {
+fun CoinDetailDTO.toCoin(): CoinDetail {
     return CoinDetail(
-        name = this.name!!,
-        description = this.description!!,
-        id = this.id!!,
-        isActive = this.is_active!!,
-        symbol = this.symbol!!,
-        tags = this.tags?.map { it.name!! } ?: emptyList(),
+        name = this.name ?: String.Empty,
+        description = this.description ?: String.Empty,
+        id = this.id ?: String.Empty,
+        isActive = this.is_active ?: false,
+        symbol = this.symbol ?: String.Empty,
+        tags = this.tags?.map { it.name ?: String.Empty } ?: emptyList(),
         members = this.team?.map {
             TeamMember(
-                id = it.id!!,
-                name = it.name!!,
-                position = it.position!!
+                id = it.id ?: String.Empty,
+                name = it.name ?: String.Empty,
+                position = it.position ?: String.Empty
             )
         } ?: emptyList()
     )

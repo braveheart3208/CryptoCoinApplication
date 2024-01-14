@@ -11,35 +11,37 @@ data class CoinDTO(
     val symbol: String? = String.Empty,
     val type: String? = String.Empty
 ){
-    fun mock() : List<CoinDTO> {
-        return listOf(
-            CoinDTO(
-                id = "123",
-                is_active = true,
-                is_new = false,
-                name = "Mock Coin 1",
-                rank = 69,
-                symbol = "$$",
-                type = ""
-            ),
-            CoinDTO(
-                id = "123321",
-                is_active = true,
-                is_new = false,
-                name = "Mock Coin 2",
-                rank = 96,
-                symbol = "&&",
-                type = ""
-            ),
-            CoinDTO(
-                id = "123456",
-                is_active = true,
-                is_new = false,
-                name = "Mock Coin 3",
-                rank = 6,
-                symbol = "%%",
-                type = ""
+    companion object{
+        fun mock() : List<CoinDTO> {
+            return listOf(
+                CoinDTO(
+                    id = "123",
+                    is_active = true,
+                    is_new = false,
+                    name = "Mock Coin 1",
+                    rank = 69,
+                    symbol = "$$",
+                    type = ""
+                ),
+                CoinDTO(
+                    id = "123321",
+                    is_active = true,
+                    is_new = false,
+                    name = "Mock Coin 2",
+                    rank = 96,
+                    symbol = "&&",
+                    type = ""
+                ),
+                CoinDTO(
+                    id = "123456",
+                    is_active = true,
+                    is_new = false,
+                    name = "Mock Coin 3",
+                    rank = 6,
+                    symbol = "%%",
+                    type = ""
+                )
             )
-        )
+        }
     }
 }
